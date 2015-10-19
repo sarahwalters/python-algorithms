@@ -71,7 +71,7 @@ class AugmentedBST(BST):
 
   def insert(self, datum):
     if not self.root:
-      self.root = AugmentedBSTNode(datum)
+      self.root = RankAugmentedBSTNode(datum)
       return
     else:
       current = self.root
@@ -81,13 +81,13 @@ class AugmentedBST(BST):
           if current.left_child:
             current = current.left_child
           else:
-            current.left_child = AugmentedBSTNode(datum, current.rank - 1)
+            current.left_child = RankAugmentedBSTNode(datum, current.rank - 1)
             return
         else: # go right
           if current.right_child:
             current = current.right_child
           else:
-            current.right_child = AugmentedBSTNode(datum, current.rank + 1)
+            current.right_child = RankAugmentedBSTNode(datum, current.rank + 1)
             return
 
 
@@ -103,7 +103,7 @@ class BSTNode:
     print self.datum
 
 
-class AugmentedBSTNode(BSTNode):
+class RankAugmentedBSTNode(BSTNode):
   def __init__(self, datum, rank=1):
     BSTNode.__init__(self, datum)
     self.rank = rank # how many data in the tree are <= this node's datum
